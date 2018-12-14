@@ -1,6 +1,6 @@
 import Octant from "./octant";
 
-export default function(x, y, z, radius) {
+export default function(x, y, z, radius, obj, func) {
   var data,
       x0 = this._x0,
       y0 = this._y0,
@@ -69,7 +69,7 @@ export default function(x, y, z, radius) {
           dy = y - +this._y.call(null, node.data),
           dz = z - +this._z.call(null, node.data),
           d2 = dx * dx + dy * dy + dz * dz;
-      if (d2 < radius) {
+      if (d2 < radius && (obj === null || func === null || func (obj, node.data))) {
         var d = Math.sqrt(radius = d2);
         x0 = x - d, y0 = y - d, z0 = z - d;
         x3 = x + d, y3 = y + d, z3 = z + d;
